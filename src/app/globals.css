@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/*
+  BrightMind design tokens.
+  Graph-paper ground, ink outlines, hard offset "sticker" shadows.
+  Each skill owns one colour: reading = grape, writing = coral, focus = mint, thinking = sun.
+*/
+@theme {
+  --color-paper: #f2f5ff;
+  --color-paper-deep: #e4eaff;
+  --color-ink: #1c2455;
+  --color-ink-soft: #4a5388;
+  --color-grape: #7b5cff;
+  --color-grape-tint: #e6e0ff;
+  --color-coral: #ff6b5b;
+  --color-coral-tint: #ffe1dc;
+  --color-mint: #1fbf9b;
+  --color-mint-tint: #d3f5ec;
+  --color-sun: #ffc233;
+  --color-sun-tint: #fff0c4;
+  --color-white: #ffffff;
+
+  --font-display: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round",
+    "Segoe UI", system-ui, sans-serif;
+  --font-reading: "Iowan Old Style", "Charter", "Georgia", "Cambria", serif;
+
+  --shadow-sticker: 4px 4px 0 0 var(--color-ink);
+  --shadow-sticker-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-sticker-pressed: 1px 1px 0 0 var(--color-ink);
+
+  --animate-pop: pop 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+  --animate-breathe: breathe 8s ease-in-out infinite;
+  --animate-shake: shake 0.35s ease-in-out;
+
+  @keyframes pop {
+    0% {
+      transform: scale(0.85);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(0.72);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-6px);
+    }
+    75% {
+      transform: translateX(6px);
+    }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(to right, rgb(123 92 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(123 92 255 / 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 3px solid var(--color-grape);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reusable pieces */
+@utility sticker {
+  border: 2.5px solid var(--color-ink);
+  box-shadow: var(--shadow-sticker);
+}
+
+@utility sticker-sm {
+  border: 2.5px solid var(--color-ink);
+  box-shadow: var(--shadow-sticker-sm);
+}
+
+@utility reading-text {
+  font-family: var(--font-reading);
+  font-size: 1.2rem;
+  line-height: 1.85;
+  max-width: 62ch;
+}
